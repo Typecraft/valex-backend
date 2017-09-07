@@ -98,6 +98,7 @@ ENV/
 # mypy
 .mypy_cache/
 
-sqlite3.db
+db.sqlite3
+
 .idea
 .sublime-*
