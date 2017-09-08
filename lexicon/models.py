@@ -11,24 +11,39 @@ class Lemma(models.Model):
     lemma = models.CharField(max_length=255)
     language = models.CharField(max_length=4, choices=LANGUAGE_CHOICES)
 
+    def __str__(self):
+        return self.lemma
+
 
 class Meaning(models.Model):
-    meaning = models.TextField()
-    lemma = models.ForeignKey(Lemma, on_delete=models.CASCADE)
-    ontologyToken = models.CharField(max_length=4)
+    meaning = models.TextField(blank=True, default='')
+    lemma = models.ForeignKey(Lemma, on_delete=models.CASCADE, related_name='meanings')
+    ontologyToken = models.CharField(default='', blank=True, max_length=4)
+
+    def __str__(self):
+        return self.meaning
 
 
 class ValenceFrame(models.Model):
-    name = models.CharField(max_length=128)
-    description = models.TextField()
+    name = models.CharField(blank=True, default='', max_length=128)
+    description = models.TextField(blank=True, default='')
+
+    def __str__(self):
+        return self.name
 
 
 class MeaningValence(models.Model):
     meaning = models.ForeignKey(Meaning, on_delete=models.CASCADE, related_name='valences')
     valenceFrame = models.ForeignKey(ValenceFrame, on_delete=models.CASCADE, related_name='examples')
 
+    def __str__(self):
+        return "Valence %s of meaning %s" % (str(self.valenceFrame), str(self.meaning))
+
 
 class Example(models.Model):
     meaningValence = models.ForeignKey(MeaningValence, on_delete=models.CASCADE, related_name='examples')
-    text = models.TextField()
-    link = models.TextField()
+    text = models.TextField(blank=True, default='')
+    link = models.TextField(blank=True, default='')
+
+    def __str__(self):
+        return "Example %d for meaningValence %d" % (self.id, self.id)
