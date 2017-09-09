@@ -11,11 +11,6 @@ from rest_framework.response import Response
 from users.serializers import UserSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
 # Create your views here.
 @api_view(['GET', 'POST'])
 def login_user(request):
