@@ -10,6 +10,7 @@ router.register(r'meanings', MeaningViewSet)
 router.register(r'valence-frames', ValenceFrameViewSet)
 router.register(r'meaning-valences', MeaningValenceViewSet)
 router.register(r'examples', ExampleViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url('^', include(router.urls))
