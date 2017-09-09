@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'lexicon'
+    'lexicon',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,6 @@ STATIC_URL = '/static/'
 
 if 'PROD' in os.environ:
     try:
-        from settings_prod import *
+        from .settings_prod import *
     except ImportError:
         pass
