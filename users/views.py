@@ -46,3 +46,5 @@ def login_user(request):
         else:
             login(request, user)
             return Response(UserSerializer(user, context={'request': request}).data, status=status.HTTP_200_OK)
+    else:
+        return Response({'detail': 'Bad username or password', 'source': response.content}, status=status.HTTP_403_FORBIDDEN)
