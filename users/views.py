@@ -1,5 +1,5 @@
 import requests
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -48,3 +48,20 @@ def login_user(request):
             return Response(UserSerializer(user, context={'request': request}).data, status=status.HTTP_200_OK)
     else:
         return Response({'detail': 'Bad username or password', 'source': response.content}, status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['GET', 'POST'])
+def logout_user(request):
+    if 'next' in request.query_params or not request.is_ajax():
+        response = Response(
+            headers={'Location': request.query_params.get('next', '/')},
+            status=status.HTTP_302_FOUND
+        )
+    else:
+        response = Response(status=status.HTTP_200_OK)
+
+    if not request.user.is_authenticated:
+        return response
+
+    logout(request)
+    return response
