@@ -118,6 +118,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Custom user and auth
+AUTH_USER_MODEL = 'users.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -131,8 +133,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
+    'PAGE_SIZE': 4
 }
+
 
 if 'PROD' in os.environ:
     try:

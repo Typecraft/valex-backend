@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -16,6 +15,7 @@ from rest_framework.response import Response
 from api.serializers import UserSerializer, LemmaSerializer, MeaningSerializer, ValenceFrameSerializer, \
     MeaningValenceSerializer, ExampleSerializer
 from lexicon.models import ValenceFrame, Meaning, Lemma, Example, MeaningValence
+from users.models import User
 
 
 class UserViewSet(viewsets.ModelViewSet):

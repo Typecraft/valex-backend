@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -5,6 +6,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.conf import settings
+
+
+# Create your models here.
+class User(AbstractUser):
+    email = models.EmailField(unique=True)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
