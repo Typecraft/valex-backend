@@ -16,7 +16,7 @@ class Lemma(models.Model):
 
 
 class Meaning(models.Model):
-    meaning = models.TextField(blank=True, default='')
+    meaning = models.CharField(max_length=511, blank=True, default='')
     lemma = models.ForeignKey(Lemma, on_delete=models.CASCADE, related_name='meanings')
     ontologyToken = models.CharField(default='', blank=True, max_length=4)
 
@@ -25,6 +25,7 @@ class Meaning(models.Model):
 
 
 class ValenceFrame(models.Model):
+
     name = models.CharField(blank=True, default='', max_length=128)
     description = models.TextField(blank=True, default='')
 
@@ -34,7 +35,7 @@ class ValenceFrame(models.Model):
 
 class MeaningValence(models.Model):
     meaning = models.ForeignKey(Meaning, on_delete=models.CASCADE, related_name='valences')
-    valenceFrame = models.ForeignKey(ValenceFrame, on_delete=models.CASCADE, related_name='examples')
+    valenceFrame = models.ForeignKey(ValenceFrame, null=True, on_delete=models.SET_NULL, related_name='examples')
 
     def __str__(self):
         return "Valence %s of meaning %s" % (str(self.valenceFrame), str(self.meaning))
