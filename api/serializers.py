@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 class LemmaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lemma
-        fields = ('url', 'id', 'lemma', 'language', 'meanings',)
+        fields = ('url', 'id', 'lemma', 'meanings', 'citationForm', 'comment', 'language',)
 
 
 class MeaningSerializer(serializers.ModelSerializer):

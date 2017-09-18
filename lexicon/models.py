@@ -10,6 +10,8 @@ class Lemma(models.Model):
     )
     lemma = models.CharField(max_length=255)
     language = models.CharField(max_length=4, choices=LANGUAGE_CHOICES)
+    citationForm = models.CharField(blank=True, max_length=255)
+    comment = models.TextField(blank=True)
 
     def __str__(self):
         return self.lemma
