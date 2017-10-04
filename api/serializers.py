@@ -20,7 +20,8 @@ class LemmaSerializer(serializers.ModelSerializer):
 class MeaningSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meaning
-        fields = ('url', 'id', 'meaning', 'ontologyToken', 'lemma', 'valences',)
+        fields = ('url', 'id', 'meaning', 'ontologyToken', 'lemma', 'valences',
+                  'relatedMeanings',)
 
 
 class ValenceFrameSerializer(serializers.ModelSerializer):

@@ -22,6 +22,8 @@ class Meaning(models.Model):
     lemma = models.ForeignKey(Lemma, on_delete=models.CASCADE, related_name='meanings')
     ontologyToken = models.CharField(default='', blank=True, max_length=4)
 
+    relatedMeanings = models.ManyToManyField("self", symmetrical=True, blank=True)
+
     def __str__(self):
         return self.meaning
 
