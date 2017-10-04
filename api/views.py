@@ -1,10 +1,13 @@
 import json
+import random
 
+from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import render
 
 
 # Create your views here.
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework import viewsets
@@ -32,27 +35,27 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class LemmaViewSet(viewsets.ModelViewSet):
-    queryset = Lemma.objects.all()
+    queryset = Lemma.objects.all().order_by('lemma')
     serializer_class = LemmaSerializer
 
 
 class MeaningViewSet(viewsets.ModelViewSet):
-    queryset = Meaning.objects.all()
+    queryset = Meaning.objects.all().order_by('meaning')
     serializer_class = MeaningSerializer
 
 
 class ValenceFrameViewSet(viewsets.ModelViewSet):
-    queryset = ValenceFrame.objects.all()
+    queryset = ValenceFrame.objects.all().order_by('name')
     serializer_class = ValenceFrameSerializer
 
 
 class MeaningValenceViewSet(viewsets.ModelViewSet):
-    queryset = MeaningValence.objects.all()
+    queryset = MeaningValence.objects.all().order_by('meaning', 'valenceFrame__name')
     serializer_class = MeaningValenceSerializer
 
 
 class ExampleViewSet(viewsets.ModelViewSet):
-    queryset = Example.objects.all()
+    queryset = Example.objects.all().order_by('text')
     serializer_class = ExampleSerializer
 
 
@@ -72,9 +75,6 @@ def api_token_auth_session(request):
 
     return HttpResponse(
         json.dumps({'token': token.key}),
-        content_type='application/json',
-        status=status.HTTP_200_OK
-    )
         content_type='application/json',
         status=status.HTTP_200_OK
     )
