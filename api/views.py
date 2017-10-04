@@ -37,26 +37,31 @@ class UserViewSet(viewsets.ModelViewSet):
 class LemmaViewSet(viewsets.ModelViewSet):
     queryset = Lemma.objects.all().order_by('lemma')
     serializer_class = LemmaSerializer
+    filter_fields = ('lemma', 'comment',)
 
 
 class MeaningViewSet(viewsets.ModelViewSet):
     queryset = Meaning.objects.all().order_by('meaning')
     serializer_class = MeaningSerializer
+    filter_fields = ('meaning', 'lemma',)
 
 
 class ValenceFrameViewSet(viewsets.ModelViewSet):
     queryset = ValenceFrame.objects.all().order_by('name')
     serializer_class = ValenceFrameSerializer
+    filter_fields = ('name', 'description',)
 
 
 class MeaningValenceViewSet(viewsets.ModelViewSet):
     queryset = MeaningValence.objects.all().order_by('meaning', 'valenceFrame__name')
     serializer_class = MeaningValenceSerializer
+    filter_fields = ('meaning', 'valenceFrame',)
 
 
 class ExampleViewSet(viewsets.ModelViewSet):
     queryset = Example.objects.all().order_by('text')
     serializer_class = ExampleSerializer
+    filter_fields = ('text',)
 
 
 @csrf_exempt
