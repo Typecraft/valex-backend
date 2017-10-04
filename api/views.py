@@ -37,19 +37,28 @@ class UserViewSet(viewsets.ModelViewSet):
 class LemmaViewSet(viewsets.ModelViewSet):
     queryset = Lemma.objects.all().order_by('lemma')
     serializer_class = LemmaSerializer
-    filter_fields = ('lemma', 'comment',)
+    filter_fields = {
+        'lemma': ['exact', 'contains', 'icontains', 'startswith'],
+        'comment': ['exact', 'contains', 'icontains', 'startswith'],
+    }
 
 
 class MeaningViewSet(viewsets.ModelViewSet):
     queryset = Meaning.objects.all().order_by('meaning')
     serializer_class = MeaningSerializer
-    filter_fields = ('meaning', 'lemma',)
+    filter_fields = {
+        'meaning': ['exact', 'contains', 'icontains', 'startswith'],
+        'lemma': ['exact']
+    }
 
 
 class ValenceFrameViewSet(viewsets.ModelViewSet):
     queryset = ValenceFrame.objects.all().order_by('name')
     serializer_class = ValenceFrameSerializer
-    filter_fields = ('name', 'description',)
+    filter_fields = {
+        'name': ['exact', 'contains', 'icontains', 'startswith'],
+        'description': ['exact', 'contains', 'icontains', 'startswith'],
+    }
 
 
 class MeaningValenceViewSet(viewsets.ModelViewSet):
@@ -61,7 +70,9 @@ class MeaningValenceViewSet(viewsets.ModelViewSet):
 class ExampleViewSet(viewsets.ModelViewSet):
     queryset = Example.objects.all().order_by('text')
     serializer_class = ExampleSerializer
-    filter_fields = ('text',)
+    filter_fields = {
+        'text': ['exact', 'contains', 'icontains', 'startswith'],
+    }
 
 
 @csrf_exempt
