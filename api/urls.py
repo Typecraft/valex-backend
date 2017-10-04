@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 
 from .views import LemmaViewSet, MeaningViewSet, ValenceFrameViewSet, MeaningValenceViewSet, ExampleViewSet, \
-    api_token_auth_session, UserViewSet
+    api_token_auth_session, UserViewSet, lemma_of_the_day
 
 router = DefaultRouter()
 router.register(r'lemmas', LemmaViewSet)
@@ -17,5 +17,6 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     url(r'^api-token-auth-session/', api_token_auth_session),
     url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^lemma-of-the-day/', lemma_of_the_day),
     url('^', include(router.urls))
 ]

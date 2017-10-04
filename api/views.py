@@ -75,3 +75,19 @@ def api_token_auth_session(request):
         content_type='application/json',
         status=status.HTTP_200_OK
     )
+        content_type='application/json',
+        status=status.HTTP_200_OK
+    )
+
+
+@api_view(['GET'])
+def lemma_of_the_day(request):
+    count = Lemma.objects.aggregate(count=Count('id'))['count']
+    today = timezone.now().date()
+    random.seed(today.year + today.month + today.day)
+    lemma = Lemma.objects.all()[random.randint(0, count-1)]
+    serializer = LemmaSerializer(lemma, context={'request': request})
+    return Response(
+        serializer.data
+    )
+
