@@ -14,7 +14,6 @@ migrate:
 makemigr:
 	python manage.py makemigrations
 
-
 .PHONY: freeze
 freeze:
 	rm -f requirements.txt && pip freeze > requirements.txt
