@@ -10,8 +10,8 @@ test:
 migrate:
 	python manage.py migrate
 
-.PHONY: makemigr
-makemigr:
+.PHONY: migrations
+migrations:
 	python manage.py makemigrations
 
 .PHONY: freeze
