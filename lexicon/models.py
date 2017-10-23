@@ -9,7 +9,7 @@ class Lemma(models.Model):
         ('deu', 'German')
     )
     lemma = models.CharField(max_length=255)
-    language = models.CharField(max_length=4, choices=LANGUAGE_CHOICES)
+    language = models.CharField(default="deu", max_length=4, choices=LANGUAGE_CHOICES)
     citationForm = models.CharField(blank=True, max_length=255)
     comment = models.TextField(blank=True)
 
@@ -29,7 +29,6 @@ class Meaning(models.Model):
 
 
 class ValenceFrame(models.Model):
-
     name = models.CharField(blank=True, default='', max_length=128)
     description = models.TextField(blank=True, default='')
 

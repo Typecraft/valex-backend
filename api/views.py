@@ -38,8 +38,9 @@ class LemmaViewSet(viewsets.ModelViewSet):
     queryset = Lemma.objects.all().order_by('lemma')
     serializer_class = LemmaSerializer
     filter_fields = {
-        'lemma': ['exact', 'contains', 'icontains', 'startswith'],
-        'comment': ['exact', 'contains', 'icontains', 'startswith'],
+        'lemma': ['exact', 'contains', 'icontains', 'startswith', 'istartswith'],
+        'comment': ['exact', 'contains', 'icontains', 'startswith', 'istartswith'],
+        'language': ['exact', 'in']
     }
 
 
