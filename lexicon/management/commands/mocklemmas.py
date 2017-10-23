@@ -7,7 +7,7 @@ from lexicon.models import Lemma
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        with open(os.path.join(os.path.dirname(__file__), 'lemmas.json')) as f:
+        with open(os.path.join(os.path.dirname(__file__), 'lemmas.json'), encoding="utf-8") as f:
             lemmas = json.load(f)
             Lemma.objects.bulk_create([
                 Lemma(
