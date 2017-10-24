@@ -15,5 +15,3 @@ class Command(BaseCommand):
                     language='deu'
                 ) for lemma in lemmas
             ])
-
-
